@@ -16,8 +16,8 @@ autoIncrement.initialize(mongoose.connection);
 
 var recipeModel = function() {
     var ingredientSchema = new Schema({
-        raw_amount: Number,
-        amount: String,
+        raw_amount: String,
+        amount: Number,
         measure: String,
         ingredient: {
             type: String,

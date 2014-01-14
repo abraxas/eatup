@@ -43,13 +43,7 @@
 // }
 "databaseConfig": {
   "host": "localhost",
-  "database": "leafjs"
-},
-"authConfig": {
-  "owner": {
-    "email": "cjay.martin@gmail.com",
-    "password": "change_me"
-  }
+  "database": "leafjs_test"
 }
 
 }

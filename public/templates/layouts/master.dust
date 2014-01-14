@@ -13,7 +13,7 @@
     <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
   </head>
   <body>
-    {! ?>"./partials/nav_menu" / !}
+    {>"./layouts/partials/_nav_menu" /}
     <div class="header">
       <div class="container">
         <div class="well">

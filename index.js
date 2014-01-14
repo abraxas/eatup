@@ -6,6 +6,8 @@ var kraken = require('kraken-js'),
 
     passport = require("passport"),
     auth = require("./lib/auth"), 
+
+    nav = require("./lib/nav"), 
     app = {};
 
 
@@ -19,6 +21,7 @@ app.configure = function configure(nconf, next) {
 
 app.requestStart = function requestStart(server) {
     // Run before most express middleware has been registered.
+    nav.init(server);
 };
 
 

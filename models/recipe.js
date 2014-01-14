@@ -2,11 +2,10 @@
 
 var mongoose = require("mongoose"), 
     Schema = mongoose.Schema, 
-    autoIncrement = require("mongoose-auto-increment"),
     ObjectId = Schema.ObjectId, fs = require("fs"), 
     Grid = require("gridfs-stream");
 
-autoIncrement.initialize(mongoose.connection);
+console.log("MN " + mongoose.modelNames());
 
 
 //Migration path...
@@ -89,10 +88,6 @@ var recipeModel = function() {
         return readstream;
     };
 
-    recipeSchema.plugin(autoIncrement.plugin, {
-        model: "Recipe",
-        startAt: 1
-    });
 
     mongoose.model("Ingredient",ingredientSchema);
     return mongoose.model("Recipe",recipeSchema);

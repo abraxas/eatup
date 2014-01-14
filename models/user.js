@@ -4,14 +4,14 @@ var mongoose = require('mongoose'),
     crypto = require('crypto'),
     uuid = require('node-uuid');
 
-
 var hash = function (passwd, salt) {
     return crypto.createHmac('sha256', salt).update(passwd).digest('hex');
 };
 
+
 var userModel = function () {
     var userSchema = new mongoose.Schema({
-        _id: {
+        email: {
             type: String
         },
         name: {
@@ -24,13 +24,6 @@ var userModel = function () {
             type: String,
             default: uuid.v1
         }
-    });
-
-    //Unique ID === email!
-    userSchema.virtual('email').get(function () {
-        return this._id;
-    }).set(function (email) {
-        this._id = email;
     });
 
     userSchema.virtual('password').set(function (password) {

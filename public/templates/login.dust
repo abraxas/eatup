@@ -1,0 +1,16 @@
+{>"layouts/master"/}
+{<main}
+<h3>Welcome to eatuprecipes.com</h3>
+<form method="post" action="/login">
+   <input type="hidden" name="_csrf" value="{_csrf}">
+   <div class="form-group">
+      <label>Email <input type="text" name="email"></label>
+   </div>
+   <div class="form-group">
+      <label>Password <input type="password" name="password"></label>
+   </div>
+   <button class="btn btn-default" type="submit" value="Log In">Log In</button>
+</form>
+<br />
+<div>Or <a href="/new_account">Create a new account</a></div>
+{/main}

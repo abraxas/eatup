@@ -1,7 +1,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <ul class="nav">
+      <ul class="nav navbar-nav">
         {#menu}
           <li class="{#is_active_tab}active{/is_active_tab}"><a href="{route}">{text}</a></li>
         {/menu}

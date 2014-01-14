@@ -5,9 +5,13 @@
 {/error}
 <input name="_user" value="{_user}" type="hidden" />
 
-
+  
   <div id="recipe-pic">
+    {?image_id}
     <img class="recipe-image" src="image"></img>
+    {:else}
+    <img src="/images/rickroll.gif" class="thumbnail"></img>
+    {/image_id}
   </div>
   <div  id="image-cg" class="control-group {@is_err id="image"}error{/is_err}">
     <label class="control-label" for="image">image</label>

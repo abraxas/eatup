@@ -1,0 +1,23 @@
+{>"layouts/master"/}
+{<main}
+Welcome to {title}
+
+<h2>Recipes</h2>
+<ul class="recipe-list thumbnails">
+{#recipes}
+  <li>
+    {?image_id}
+      <img src="/recipes/{_id}/image" class="thumbnail"></img>
+    {:else}
+      <img src="/images/rickroll.gif" class="thumbnail"></img>
+    {/image_id}
+    {name}
+    <a href="/recipes/{_id}/view">View</a>
+    <a href="/recipes/{_id}/edit">Edit</a>
+    <a href="/recipes/{_id}/delete">Delete</a>
+  
+  </li>
+{/recipes}
+</ul>
+<a href="/recipes/new">Add Recipe</a>
+{/main}

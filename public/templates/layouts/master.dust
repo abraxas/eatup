@@ -1,14 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>{+title /}</title>
-    <link rel="stylesheet" href="css/app.css" />
-</head>
-<body>
-<div id="wrapper">
-    {+body /}
-</div>
-<script data-main="js/app" src="components/requirejs/require.js"></script>
-</body>
-</html>
+{^xhr}
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>
+      {+title}
+      Eat Up!
+      {/title}
+    </title>
+    <link rel='stylesheet' href='/components/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/css/app.css'>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    {! ?>"./partials/nav_menu" / !}
+    <div class="header">
+      <div class="container">
+        <div class="well">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+    {?sidebar}
+      <div class="row">
+        <div class="span3">
+          <div class="well">span3</div>
+        </div>
+
+        <div class="span9">
+          <div class="well">
+            {+main}
+            Coming Soon...
+            {/main}
+          </div>
+        </div>
+      </div>
+    {:else}
+      <div class="row">
+        <div class="span12">
+            {+main}
+            Coming Soon...
+            {/main}
+        </div>
+      </div>
+    {/sidebar}
+    </div>
+   
+    </body>
+  </html>
+  {:else}
+  {+main}
+  {}
+  {/main}
+  {/xhr}

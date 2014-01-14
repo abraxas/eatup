@@ -3,13 +3,13 @@
 'use strict';
 
 var nodeenv = process.env.NODE_ENV;
-
 if(! ( nodeenv && nodeenv === "test" ) ) {
   process.env.NODE_ENV = "test";
   console.log("SETTING ENV TO TEST");
 }
 
 var app = require('../index'),
+    mongoose = require('mongoose'),
     kraken = require('kraken-js'),
     request = require('supertest'),
     assert = require('assert');
@@ -29,6 +29,7 @@ describe('user', function () {
 
 
     afterEach(function (done) {
+        mongoose.connection.close();
         mock.close(done);
     });
 

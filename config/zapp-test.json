@@ -43,7 +43,7 @@
 // }
 "databaseConfig": {
   "host": "localhost",
-  "database": "leafjs"
+  "database": "leafjs_test"
 }
 
 }

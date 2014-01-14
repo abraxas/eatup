@@ -4,6 +4,7 @@
 
 
 var app = require('../index'),
+    mongoose = require('mongoose'),
     Recipe = require('../models/recipe'),
     kraken = require('kraken-js'),
     request = require('supertest'),
@@ -17,16 +18,17 @@ describe('recipe', function () {
 
     beforeEach(function (done) {
         kraken.create(app).listen(function (err, server) {
-          Recipe.remove({},function() {
-            mock = server;
-            done(err);
-          });
+          mock = server;
+          done(err);
         });
     });
 
 
     afterEach(function (done) {
+      Recipe.remove({},function() {
+        mongoose.connection.close();
         mock.close(done);
+      });
     });
 
 

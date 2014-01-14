@@ -1,0 +1,80 @@
+{#error}
+<div class="alert alert-error">
+<strong>Error: </strong>{.}
+</div>
+{/error}
+<input name="_user" value="{_user}" type="hidden" />
+
+
+  <div id="recipe-pic">
+    <img class="recipe-image" src="image"></img>
+  </div>
+  <div  id="image-cg" class="control-group {@is_err id="image"}error{/is_err}">
+    <label class="control-label" for="image">image</label>
+    <div class="controls">
+      <input type="file" name="image" value="{image}" />
+      <span id="image-error" class="help-inline">{@error id="image"}{.}{/error}</span>
+    </div>
+  </div>
+  
+  <div  id="name-cg" class="control-group {@is_err id="name"}error{/is_err}">
+    <label class="control-label" for="name">Name</label>
+    <div class="controls">
+      <input name="name" value="{name}" />
+      <span id="name-error" class="help-inline">{@error id="name"}{.}{/error}</span>
+    </div>
+  </div>
+  <div id="description-cg" class="control-group {@is_err id="description"}error{/is_err}">  
+
+  <label  class="control-label" for="description">Description</label>
+    <div class="controls">
+  <input name="description" value="{description}" />
+      <span id="description-error" class="help-inline">{@error id="description"}{.}{/error}</span>
+    </div>
+  </div>  
+  <label for="ingredients.amount[1]">Ingredients</label>
+    <div class="row" id="recipe_ingredients">
+      {> "recipes/partials/_recipe_form_ingredients" /}
+    </div>
+        <a id="add_ingredient" href="#">Add Ingredient</a>
+  
+  
+  <label for="steps">Steps</label>
+    <div id="recipe_steps">
+      {> "recipes/partials/_recipe_form_steps" /}
+    </div>
+        <a id="add_step" href="#">Add Step</a>
+<br />        
+
+<script src="/javascripts/dust-full-1.2.5.js" ></script>
+<script src="/javascripts/dust-helpers-1.1.1.js" ></script>
+<script src="/javascripts/remember.js" ></script>
+<script src="/javascripts/dust-filters.js" ></script>
+<script src="/partials/partials/recipe_form_step.js" ></script>
+<script src="/partials/partials/recipe_form_ingredient.js" ></script>
+<script>
+  $('#add_step').click(function() {
+    dust.render("partials/recipe_form_step",null,function(err,out) {
+    if(err) {
+      console.log(err);
+    }
+    $('#recipe_steps').append(out);
+    });
+  });
+  $(document).on('click','.delete_step',function() {
+    $(this).parent().remove();
+  });
+  $('#add_ingredient').click(function() {
+    dust.render("partials/recipe_form_ingredient",null,function(err,out) {
+    if(err) {
+      console.log(err);
+    }
+    $('#recipe_ingredients').append(out);
+    });
+  });
+  $(document).on('click','.delete_step',function() {
+    $(this).parent().remove();
+  });
+
+ 
+</script>

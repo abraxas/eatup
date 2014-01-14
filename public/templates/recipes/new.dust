@@ -1,0 +1,11 @@
+{>"layouts/master"/}
+{<main}
+<h1> Create Recipe</h1>
+
+{#recipe}
+<form method="POST" enctype="multipart/form-data">
+  {>"recipes/partials/_recipe_form" /}
+  <button type="submit">Submit</button>
+</form>
+{/recipe}
+{/main}

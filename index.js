@@ -1,12 +1,18 @@
 'use strict';
 
 
-var kraken = require('kraken-js'),
+var kraken = require('kraken-js'),    
+    db = require("./lib/database"), 
+
+    passport = require("passport"),
+    auth = require("./lib/auth"), 
     app = {};
 
 
 app.configure = function configure(nconf, next) {
     // Async method run on startup.
+    db.config(nconf.get("databaseConfig"));
+    auth.config(passport, nconf.get("authConfig"));
     next(null);
 };
 

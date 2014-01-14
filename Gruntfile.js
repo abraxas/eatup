@@ -4,6 +4,15 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
+	env: {
+	  options: {
+
+          },
+          test : {
+	    NODE_ENV : grunt.option('environment') || 'test'
+          }
+
+	},
         jshint: {
             files: ['controllers/**/*.js', 'lib/**/*.js', 'models/**/*.js'],
             options: {
@@ -91,6 +100,7 @@ module.exports = function (grunt) {
         }
     });
 
+//    grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-clean');

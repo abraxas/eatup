@@ -6,6 +6,9 @@ var kraken = require('kraken-js'),
 
     passport = require("passport"),
     auth = require("./lib/auth"), 
+    flash = require("connect-flash"),
+
+    nav = require("./lib/nav"), 
     app = {};
 
 
@@ -19,11 +22,20 @@ app.configure = function configure(nconf, next) {
 
 app.requestStart = function requestStart(server) {
     // Run before most express middleware has been registered.
+    nav.init(server);
 };
 
 
 app.requestBeforeRoute = function requestBeforeRoute(server) {
     // Run before any routes have been added.
+    server.use(flash());
+    server.use(passport.initialize());
+    server.use(passport.session());
+    server.use(function(req,res,next) {
+      res.locals.user = req.user;
+      console.log("USER = " + res.locals.user);
+      next();
+    });
 };
 
 

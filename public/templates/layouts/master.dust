@@ -9,11 +9,13 @@
     </title>
     <link rel='stylesheet' href='/components/bootstrap/dist/css/bootstrap.min.css'>
     <link rel='stylesheet' href='/css/app.css'>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>    
     <script src="/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    {+head}
+    {/head}
   </head>
   <body>
-    {>"./layouts/partials/_nav_menu" /}
+    {>"layouts/partials/_nav_menu" /}
     <div class="header">
       <div class="container">
         <div class="well">

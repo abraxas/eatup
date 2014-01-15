@@ -1,0 +1,8 @@
+{
+  "name": "dustjs-helpers-amd",
+  "version": "1.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/playlyfe/dustjs-helpers-amd.git"
+  }
+}

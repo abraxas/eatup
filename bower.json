@@ -4,6 +4,13 @@
   "dependencies": {
     "requirejs": "~2.1.10",
     "bootstrap": "~3.0.3",
-    "jquery": "~2.0.3"
+    "jquery": "~2.0.3",
+    "dustjs": "~0.3.0",
+    "dustjs-linkedin": "~2.2.3",
+    "dustjs-linkedin-helpers": "~1.1.1",
+    "dustjs-helpers-amd": "*",
+    "dustjs-linkedin-amd": "*",
+    "EventEmitter": "~1.0.0",
+    "requirejs-text": "~2.0.10"
   }
 }

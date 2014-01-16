@@ -1,76 +1,77 @@
 {#error}
 <div class="alert alert-error">
-<strong>Error: </strong>{.}
+   <strong>Error: </strong>{.}
 </div>
 {/error}
 <input name="_user" value="{_user}" type="hidden" />
-
-  <div class="form-group col-md-4">
-  <div id="recipe-pic">
-    {?image_id}
-    <img class="recipe-image" src="image"></img>
-    {:else}
-    <img src="/images/rickroll.gif" class="thumbnail"></img>
-    {/image_id}
-  </div>
-  <div  id="image-cg" class="form-group {@is_err id="image"}error{/is_err}">
-    <label class="control-label" for="image">Image</label>
-      <input type="file" name="image" value="{image}" />
-      <span id="image-error" class="help-inline">{@error id="image"}{.}{/error}</span>
-  </div>
-  
-  <div  id="name-cg" class="form-group {@is_err id="name"}error{/is_err}">
-    <label class="control-label" for="name">Name</label>
-      <input class="form-control" name="name" value="{name}" />
-      <span id="name-error" class="help-inline">{@error id="name"}{.}{/error}</span>
-  </div>
-  <div id="description-cg" class="form-group {@is_err id="description"}error{/is_err}">  
-  <label  class="control-label" for="description">Description</label>
-    <div class="controls">
-  <input class="form-control" name="description" value="{description}" />
-      <span id="description-error" class="help-inline">{@error id="description"}{.}{/error}</span>
-    </div>
-  </div>  
-  <label for="ingredients.amount[1]">Ingredients</label>
-    <div class="row" id="recipe_ingredients">
-      {> "recipes/partials/_recipe_form_ingredients" /}
-    </div>
-        <a id="add_ingredient" href="#">Add Ingredient</a>
-  
-  
-  <label for="steps">Steps</label>
-    <div id="recipe-steps" data-steps-value={raw_steps|js}>
+<div class="form-group col-md-6">
+   <div id="recipe-pic">
+      {?image_id}
+      <img class="recipe-image" src="image"></img>
+      {:else}
+      <img src="/images/rickroll.gif" class="thumbnail"></img>
+      {/image_id}
+   </div>
+   <div  id="image-cg" class="form-group {@is_err id="image"}error{/is_err}">
+   <label class="control-label" for="image">Image</label>
+   <input type="file" name="image" value="{image}" />
+   <span id="image-error" class="help-inline">{@error id="image"}{.}{/error}</span>
+</div>
+<div  id="name-cg" class="form-group {@is_err id="name"}error{/is_err}">
+<label class="control-label" for="name">Name</label>
+<input class="form-control" name="name" value="{name}" />
+<span id="name-error" class="help-inline">{@error id="name"}{.}{/error}</span>
+</div>
+<div id="description-cg" class="form-group {@is_err id="description"}error{/is_err}">  
+<label  class="control-label" for="description">Description</label>
+<div class="controls">
+   <input class="form-control" name="description" value="{description}" />
+   <span id="description-error" class="help-inline">{@error id="description"}{.}{/error}</span>
+</div>
+</div>  
+<div id="ingredients-wrapper">
+   <label for="ingredients.amount[1]">Ingredients</label>
+   <div class="form-group" id="recipe-ingredients">
+      {#ingredients}
+      {> "recipes/partials/_recipe_form_ingredient" /}
+      {/ingredients}
+   </div>
+   <a id="add_ingredient" href="#">Add Ingredient</a>
+</div>
+<div id="steps-wrapper">
+   <label for="steps">Directions</label>
+   <div id="recipe-steps" class="form-group">    
       {#steps}
       {> "recipes/partials/_recipe_form_step" /}
       {/steps}
-    </div>
-        <a id="add_step" href="#">Add Step</a>
+   </div>
+   <a id="add_step" href="#">Add Step</a>
+</div>
 <br />        
-
 <!-- script>
-  $('#add_step').click(function() {
-    dust.render("recipes/partials/_recipe_form_step",null,function(err,out) {
-    if(err) {
-      console.log(err);
-    }
-    console.log("WOOT " + out);
-    $('#recipe_steps').append(out);
-    });
-  });
-  $(document).on('click','.delete_step',function() {
-    $(this).parent().remove();
-  });
-  $('#add_ingredient').click(function() {
-    dust.render("recipes/partials/_recipe_form_ingredient",null,function(err,out) {
-    if(err) {
-      console.log(err);
-    }
-    $('#recipe_ingredients').append(out);
-    });
-  });
-  $(document).on('click','.delete_step',function() {
-    $(this).parent().remove();
-  });
-
- 
-</script -->
+   $('#add_step').click(function() {
+     dust.render("recipes/partials/_recipe_form_step",null,function(err,out) {
+     if(err) {
+       console.log(err);
+     }
+     console.log("WOOT " + out);
+     $('#recipe_steps').append(out);
+     });
+   });
+   $(document).on('click','.delete_step',function() {
+     $(this).parent().remove();
+   });
+   $('#add_ingredient').click(function() {
+     dust.render("recipes/partials/_recipe_form_ingredient",null,function(err,out) {
+     if(err) {
+       console.log(err);
+     }
+     $('#recipe_ingredients').append(out);
+     });
+   });
+   $(document).on('click','.delete_step',function() {
+     $(this).parent().remove();
+   });
+   
+   
+   </script -->

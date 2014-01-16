@@ -14,19 +14,13 @@ require(['config'], function (config) {
 
 var RecipeFormController = function() {
   require(['jquery','dust-helpers','view-model'], function($,dust,view) {
-    $scope.steps = $("#recipe-steps").data("steps-value") || [""];
-    console.log("SS = " + JSON.stringify($scope.steps))
 
-    view.render_steps();
 
     var ctrl = {
-      add_step: function() {
-        $scope.steps.push('');
-        view.render_steps();
-      }
     };
 
-    $(document).on('click','#add_step',ctrl.add_step);
+
+
 
     console.log("Controller Done!");
   });
@@ -69,64 +63,60 @@ $.fn.selectRange = function(start, end) {
         clear_steps: function() {
                $("#recipe-steps").html("");
              },  
-        render_steps: function(data) {
-                var steps = data || $scope.steps;
-                var i = 1;
-                var focus = $(":focus").parent().index();
+          add_step: function(step,offset) {
+               offset = offset || $scope.offset || $("#recipe-steps textarea").length + 1;
+               var render_data = {step: "",offset: offset};              
+               $scope.offset = offset+1;
 
-                viewmodel.clear_steps();
-
-                steps = [].concat(steps);
-
-                steps.forEach(function(step) {
-                    viewmodel.render_step(step,i++);                    
-                    });
-                if(focus) {
-                  var bar = $("#recipe-steps :nth-child("+focus+") input");
-
-                  var x = $("#recipe-steps :nth-child("+focus+") input");
-                  x.focus().selectRange(0,0);
-                }
-
-              },
-          render_step: function(step,offset) {
-               offset = offset || $scope.steps.length;
-               var render_data = {step: step,offset: offset};              
-
-               console.log("WTF " + JSON.stringify(render_data));
                dust.render("recipes/partials/_recipe_form_step",
                    render_data,function(err,out) {
                    if(err) {
-                   console.log(err);
+                     console.log(err);
                    }
-                   console.log("WOOT " + out);
                    $('#recipe-steps').append(out);
                    });
-             }
+               return false;
+             },
+          add_ingredient: function(ingredient,offset) {
+               var render_data = ingredient
+
+               dust.render("recipes/partials/_recipe_form_ingredient",
+                   render_data,function(err,out) {
+                   if(err) {
+                     console.log(err);
+                   }
+                   $('#recipe-ingredients').append(out);
+                   });
+               return false;
+             },
+          re_number: function() {
+            var _$steplabels = $("#recipe-steps label.step-label");
+            var offset = 1;
+            _$steplabels.each(function(ind,Element) {
+              $(Element).html(''+ offset++ + ".");                            
+            });
+            $scope.offset = offset;
+            
+          }
 
       };
 
+      $('#steps-wrapper').on('click','#add_step',viewmodel.add_step);
+      $('#ingredients-wrapper').on('click','#add_ingredient',viewmodel.add_ingredient);
+
       //step binding and auto-full
-      $("#recipe-steps").on('keyup','input',function() {
-          var new_steps = $("#recipe-steps input").map(function() {
-            return $(this).val();
-          }).get();
-          console.log("RS " + JSON.stringify(new_steps));
-
-          $scope.steps = new_steps;          
-          while($scope.steps.length > 1 && ($scope.steps[new_steps.length -1] === "") && ($scope.steps[new_steps.length -2] === "") ) {
-              $scope.steps.pop();
-              viewmodel.render_steps()
-          } 
-          if($scope.steps[new_steps.length -1] !== "") {
-              $scope.steps.push("");
-              viewmodel.render_step()
-          } 
-
-
-
-
+      $("#recipe-steps").on('keyup','textarea',function() {
+          viewmodel.add_step()
+          return false;
       });
+      $("#recipe-steps").on('click','a.remove-step',function() {
+          $(this).parents("div.recipe-step").remove();
+          viewmodel.re_number();
+          return false;
+      });
+
+
+      //some setup
 
       console.log("View Done!");      
       return viewmodel;

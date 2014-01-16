@@ -16,15 +16,15 @@ module.exports = function(app) {
             });
         });
     });
-    app.get("/recipes/new", function(req, res) {
-        var model = {
-            recipe: {}
-        };
-        model.recipe.name = "blah";
-        model.recipe.steps = [ "this", "is", "a", "test" ];
+
+    var prep_form = function(model,errors) {
+        model = model || {};
+        model.recipe = model.recipe || {};
+
+        model.recipe.steps = model.recipe.steps || [];
+        model.recipe.steps.push("");
+
         var tmpstep = model.recipe.steps;
-        tmpstep.push("");
-        model.recipe.raw_steps = tmpstep;
         model.recipe.steps = [];
         var i = 1;
         tmpstep.forEach(function(x) {
@@ -33,6 +33,19 @@ module.exports = function(app) {
                 offset: i++
             });
         });
+
+        model.ingredients = [
+          {amount: "1",measure:"tsp",ingredient: "fnord"},
+          {custom_ingredient: "magic to taste"}
+        ];
+      
+        return model;
+    }
+
+
+    app.get("/recipes/new", function(req, res) {
+        var model = prep_form();
+
         res.format({
             json: function() {
                 res.json(model);

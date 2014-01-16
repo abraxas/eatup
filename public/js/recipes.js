@@ -138,6 +138,20 @@ $.fn.selectRange = function(start, end) {
 
       };
 
+       function readURL(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function(e) {
+                   $('#recipe-image-preview').attr('src', e.target.result);
+               }
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $("#recipe-image-upload").change(function() {
+           readURL(this);
+       });
+
       $('#steps-wrapper').on('click','#add_step',viewmodel.add_step);
       $('#ingredients-wrapper').on('click','#add_ingredient',viewmodel.add_ingredient);
 

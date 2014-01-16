@@ -5,16 +5,16 @@
 {/error}
 <input name="_user" value="{_user}" type="hidden" />
 <div class="form-group col-md-6">
-   <div id="recipe-pic">
+   <div id="recipe-pic" class="recipe-preview">
       {?image_id}
-      <img class="recipe-image" src="image"></img>
+      <img id="recipe-image-preview"  class="image-responsive" src="image"></img>
       {:else}
-      <img src="/images/rickroll.gif" class="thumbnail"></img>
+      <img src="/images/rickroll.gif" class="image-responsive" id="recipe-image-preview"></img>
       {/image_id}
    </div>
    <div  id="image-cg" class="form-group {@is_err id="image"}error{/is_err}">
    <label class="control-label" for="image">Image</label>
-   <input type="file" name="image" value="{image}" />
+   <input type="file" id="recipe-image-upload" name="image" value="{image}" />
    <span id="image-error" class="help-inline">{@error id="image"}{.}{/error}</span>
 </div>
 <div  id="name-cg" class="form-group {@is_err id="name"}error{/is_err}">

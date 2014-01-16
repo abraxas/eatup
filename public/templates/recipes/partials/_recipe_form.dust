@@ -31,13 +31,16 @@
 </div>  
 <div id="ingredients-wrapper">
    <label for="ingredients.amount[1]">Ingredients</label>
-   <div class="form-group" id="recipe-ingredients">
+   <div id="recipe-ingredients">
       {#ingredients}
-      {> "recipes/partials/_recipe_form_ingredient" /}
-      {/ingredients}
-   </div>
+            {> "recipes/partials/_recipe_form_ingredients" /}
+   {/ingredients}
+</div>
+<div>
    <a id="add_ingredient" href="#">Add Ingredient</a>
 </div>
+</div>
+<br />
 <div id="steps-wrapper">
    <label for="steps">Directions</label>
    <div id="recipe-steps" class="form-group">    
@@ -47,31 +50,3 @@
    </div>
    <a id="add_step" href="#">Add Step</a>
 </div>
-<br />        
-<!-- script>
-   $('#add_step').click(function() {
-     dust.render("recipes/partials/_recipe_form_step",null,function(err,out) {
-     if(err) {
-       console.log(err);
-     }
-     console.log("WOOT " + out);
-     $('#recipe_steps').append(out);
-     });
-   });
-   $(document).on('click','.delete_step',function() {
-     $(this).parent().remove();
-   });
-   $('#add_ingredient').click(function() {
-     dust.render("recipes/partials/_recipe_form_ingredient",null,function(err,out) {
-     if(err) {
-       console.log(err);
-     }
-     $('#recipe_ingredients').append(out);
-     });
-   });
-   $(document).on('click','.delete_step',function() {
-     $(this).parent().remove();
-   });
-   
-   
-   </script -->

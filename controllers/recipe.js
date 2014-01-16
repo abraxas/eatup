@@ -36,7 +36,7 @@ module.exports = function(app) {
 
         model.ingredients = [
           {amount: "1",measure:"tsp",ingredient: "fnord"},
-          {custom_ingredient: "magic to taste"}
+          {custom_ingredient: "magic to taste", show_custom: 1}
         ];
       
         return model;

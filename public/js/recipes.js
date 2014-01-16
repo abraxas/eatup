@@ -31,17 +31,16 @@ define('view-model',[
     "jquery","dust-helpers",
     "text!/templates/US/en/recipes/partials/_recipe_form.js",
     "text!/templates/US/en/recipes/partials/_recipe_form_ingredient.js",
-    "text!/templates/US/en/recipes/partials/_recipe_form_ingredients.js",
+    "text!/templates/US/en/recipes/partials/_recipe_form_ingredient_inner.js",
     "text!/templates/US/en/recipes/partials/_recipe_form_step.js",
     "text!/templates/US/en/recipes/partials/_recipe_form_steps.js",
-    "text!/templates/US/en/recipes/partials/_recipe_view_contents.js"],function($,dust,a,b,c,d,e,f,g) {
+    "text!/templates/US/en/recipes/partials/_recipe_view_contents.js"],function($,dust,a,b,c,d,e,f) {
       dust.loadSource(a);
       dust.loadSource(b);
       dust.loadSource(c);
       dust.loadSource(d);
       dust.loadSource(e);
       dust.loadSource(f);
-      dust.loadSource(g);
      
 $.fn.selectRange = function(start, end) {
     return this.each(function() {
@@ -78,7 +77,7 @@ $.fn.selectRange = function(start, end) {
                return false;
              },
           add_ingredient: function(ingredient,offset) {
-               var render_data = ingredient
+               var render_data = ingredient;
 
                dust.render("recipes/partials/_recipe_form_ingredient",
                    render_data,function(err,out) {
@@ -95,8 +94,46 @@ $.fn.selectRange = function(start, end) {
             _$steplabels.each(function(ind,Element) {
               $(Element).html(''+ offset++ + ".");                            
             });
-            $scope.offset = offset;
-            
+            $scope.offset = offset;            
+          },
+          swap_ingredient_type: function(target) {
+              var $target = $(target);
+              var $div = $target.parents(".ingredient-row");
+
+
+              var render_data;
+              if($div.hasClass('custom') ) {
+                console.log("Toggle from custom to non-custom.");
+                $div.removeClass('custom');
+                var cval = $div.find('input').val();
+                $div.data('custom',cval);                
+
+                var render_data = $div.data('ingredient-data') || {};
+
+
+              } else {
+                console.log("Toggle from non-custom to custom.");
+                $div.addClass('custom');
+                
+                var cvals = {};
+                $div.find('input').each(function() {
+                  cvals[$(this).attr('name')] = $(this).val();
+                });
+                $div.data('ingredient-data', cvals);
+
+                var cust = $div.data('custom') || "";
+                var render_data = {custom_ingredient: cust, show_custom: 1};
+
+              }
+              dust.render("recipes/partials/_recipe_form_ingredient_inner",
+                 render_data,function(err,out) {
+                 if(err) {
+                   console.log(err);
+                 }
+                 $div.html(out);
+                 });
+             return false;
+
           }
 
       };
@@ -112,6 +149,14 @@ $.fn.selectRange = function(start, end) {
       $("#recipe-steps").on('click','a.remove-step',function() {
           $(this).parents("div.recipe-step").remove();
           viewmodel.re_number();
+          return false;
+      });
+      $("#recipe-ingredients").on('click','a.remove-ingredient',function() {
+          $(this).parents("div.recipe-ingredient").remove();
+          return false;
+      });
+      $("#recipe-ingredients").on('click','a.swap-ingredient',function() {
+          viewmodel.swap_ingredient_type(this);
           return false;
       });
 

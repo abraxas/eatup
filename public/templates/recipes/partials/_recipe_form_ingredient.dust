@@ -1,38 +1,8 @@
-<div class="ingredients control-group {@is_err id="ingredients.{index}.*"}error{/is_err}">  
+<div class="ingredients control-group">  
+<div class="row recipe-ingredient">
+   <div class="ingredient-row col-sm-12 {?custom_ingredient} custom{/custom_ingredient}">
+      {> "recipes/partials/_recipe_form_ingredient_inner" /}
+   </div>
+</div>
+</div>
 
-<div class="form-group row">
-{#custom_ingredient}
-    <div class="col-sm-10">
-      <input class="form-control" name="ingredients.custom_ingredient" value="{.}">
-    </div>
-{:else}
-    <div class="col-sm-2">
-      <input id="ingredients-{index}-amount" 
-      class="amount span1 form-control" name="ingredients.amount[{index}]" value="{amount}" placeholder="1">
-      <span class="help-block small">Amount</span>
-      <span id="ingredient-error" class="help-inline">{@error id="ingredients.{index}.amount"}{.}{/error}</span>
-    </div>
-
-
-    <div class="col-sm-3">
-      <input id="ingredients-{index}-measure" placeholder="tsp"  class="measure span1 form-control" name="ingredients.measure[{index}]" value="{measure}">
-      <span class="help-block small">Measure</span>      
-      <span id="ingredient-error" class="help-inline">{@error id="ingredients.{index}.measure"}{.}{/error}</span>      
-    </div>
-    
-
-    <div class="col-sm-5">
-      <input placeholder="ingredient" id="ingredients-{index}-ingredient" class="ingredient span4 form-control" name="ingredients.ingredient[{index}]" value="{ingredient}">
-      <span class="help-block small">Ingredient</span>            
-      <span id="ingredient-error" class="help-inline">{@error id="ingredients.{index}.ingredient"}{.}{/error}</span>      
-      <a href="#" class="delete_step"><i class="icon-trash"></i></a>
-    </div>    
-{/custom_ingredient}
-
-<div class="col-sm-1 ingredients-swap">
-<a href="#"><span class="glyphicon glyphicon-adjust"></span></a>
-</div>    
-<div class="col-sm-1 ingredients-remove">
-<a href="#"><span class="glyphicon glyphicon-remove"></span></a>
-</div>    
-</div>    

@@ -1,7 +1,0 @@
-<div class="ingredients control-group {@is_err id="ingredients.{index}.*"}error{/is_err}">  
-<div class="row recipe-ingredient" data-value="{.|js}">
-   <div class="ingredient-row col-sm-12 {?custom_ingredient} custom{/custom_ingredient}">
-      {> "recipes/partials/_recipe_form_ingredient" /}
-   </div>
-</div>
-</div>

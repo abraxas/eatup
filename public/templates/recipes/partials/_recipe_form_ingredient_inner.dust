@@ -1,6 +1,6 @@
 {?show_custom}
 <div class="form-group col-sm-10">
-   <input class="form-control" name="ingredients.custom_ingredient" value="{custom_ingredient}">
+   <input class="form-control" name="custom_ingredient" value="{custom_ingredient}">
 </div>
 {:else}
 <div class="form-group col-sm-2">

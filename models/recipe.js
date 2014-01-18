@@ -18,15 +18,12 @@ var recipeModel = function() {
         raw_amount: String,
         amount: Number,
         measure: String,
-        ingredient: {
-            type: String,
-            required: true
-        }
+        ingredient: String,
+        custom_ingredient: String
     });
     var recipeSchema = new Schema({
         user_email: {
             type: String,
-            required: true,
             ref: "User"
         },
         name: {

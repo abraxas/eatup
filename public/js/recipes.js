@@ -28,7 +28,7 @@ var RecipeFormController = function() {
 
 
 define('view-model',[
-    "jquery","dust-helpers",
+    "jquery","dust-helpers","upload",
     "text!/templates/US/en/recipes/partials/_recipe_form.js",
     "text!/templates/US/en/recipes/partials/_recipe_form_ingredient.js",
     "text!/templates/US/en/recipes/partials/_recipe_form_ingredient_inner.js",
@@ -59,9 +59,6 @@ $.fn.selectRange = function(start, end) {
 
 
       var viewmodel = {
-        clear_steps: function() {
-               $("#recipe-steps").html("");
-             },  
           add_step: function(step,offset) {
                offset = offset || $scope.offset || $("#recipe-steps textarea").length + 1;
                var render_data = {step: "",offset: offset};              
@@ -95,6 +92,33 @@ $.fn.selectRange = function(start, end) {
               $(Element).html(''+ offset++ + ".");                            
             });
             $scope.offset = offset;            
+          },
+          get_data: function() {
+            var rval = {};
+            console.log("GETDATA!");
+            rval.name = $('#recipe-form input[name="name"]').val();
+            rval.desc = $('#recipe-form input[name="description"]').val();
+            rval.ingredients = viewmodel.get_ingredients_data();
+            rval.steps = viewmodel.get_steps_data();
+            rval.image = $("#recipe-form #recipe-image-upload").val();
+            return rval;          
+          },
+          get_ingredients_data: function() {
+            console.log("WTF " + $('div.ingredient-row').length);
+            return $('div.ingredient-row').map(function() {
+              var rval = {};
+              $(this).find('input').each(function() {
+                  rval[$(this).attr('name')] = $(this).val();
+                });
+              return rval;
+            }).get();
+
+          },
+          get_steps_data: function() {
+            var $tex = $('#recipe-steps').find('textarea');
+              var steps = $tex.map(function(i,E) { return $(E).val(); }).get();      
+              if(steps[steps.length-1] == "") { steps.pop(); }
+              return steps;
           },
           swap_ingredient_type: function(target) {
               var $target = $(target);
@@ -134,8 +158,35 @@ $.fn.selectRange = function(start, end) {
                  });
              return false;
 
+          },
+          submit: function(url) {
+              var data = viewmodel.get_data();
+              data._csrf = $("#csrf").val();
+              console.log("SUBMIT! " + JSON.stringify(data));
+              console.log("TO: " + location.pathname + "/" + url);
+              $.ajax({
+                type: "POST",
+//                xhr: function() {
+//                  var myX = $.ajaxSettings.xhr();
+//                  if(myX.upload) {
+//                      myX.upload.addEventListener('progress',viewmodel.progress, false);
+//                  }
+//                  return myX;
+//                },
+                url: url,
+                data: data,
+//                cache: false,
+//                contentType: false,
+//                processData: false,
+                success: function() {
+                  console.log("SUCK_WHAT?");
+                }
+              });
+              return false;
+          },
+          progress: function(p) {
+            console.log("PROGRESS... " + p);
           }
-
       };
 
        function readURL(input) {
@@ -157,7 +208,9 @@ $.fn.selectRange = function(start, end) {
 
       //step binding and auto-full
       $("#recipe-steps").on('keyup','textarea',function() {
-          viewmodel.add_step()
+          if($('#recipe-steps textarea').last().val() !== '') {
+            viewmodel.add_step()
+          }
           return false;
       });
       $("#recipe-steps").on('click','a.remove-step',function() {
@@ -173,6 +226,26 @@ $.fn.selectRange = function(start, end) {
           viewmodel.swap_ingredient_type(this);
           return false;
       });
+      $("#submit-new").click(function(event) {
+        event.preventDefault();
+        viewmodel.submit('new');
+        return false;
+      });
+      $("#submit-edit").click(function(event) {
+        event.preventDefault();
+        viewmodel.submit('edit');
+        return false;        
+      });
+      $("#recipe-image-upload").fileupload({
+        dataType: 'json',
+        done: function(e, data) {
+          console.log("DONE!");
+        }
+      }).fileupload(
+        'option', {
+          url: '/recipes/files'
+        } 
+      );
 
 
       //some setup

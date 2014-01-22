@@ -1,6 +1,7 @@
 "use strict";
 
 var Recipe = require("../models/recipe");
+var os = require('os');
 
 module.exports = function(app) {
     var model = new Recipe();
@@ -75,17 +76,23 @@ module.exports = function(app) {
         var rval = {success: 1};
         
         console.log("BLAH: " + JSON.stringify(req.files));
+        console.log("BLAT: " + JSON.stringify(req.body));
         var data = req.body;
         if(req.user) {
           data.user_email = req.user.email;
         }
         delete data._csrf;
+        delete data.image;
+
+        console.log("TEMP = " + os.tmpDir());
 
         console.log("GOT: " + JSON.stringify(data));
         Recipe.create(data,function(err,rec) {
+          console.log(" IN IT" + rval);
           if(err) {
             console.log("ERROR: " + err);
           }
+          console.log(" OTT IT + " + rec);
           return res.json(rval);          
         });
     });

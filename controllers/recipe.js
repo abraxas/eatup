@@ -130,20 +130,38 @@ module.exports = function(app) {
         delete data.image;
         console.log("A2S " + JSON.stringify(req.body));
         Recipe.create(data, function(err, rec) {
-            var done = function(err, req, file) {
-                if (err) {
-                    console.log("ERROR: " + err);
-                }
-                rval._id = rec._id;
-                return res.json(rval);
-            };
-//            if (req.files && req.files["recipe-image-upload"]) {
-//                rec.saveImage(req.files["recipe-image-upload"], function(err, file) {
-//                    return done(err, rec, file);
-//                });
-//            } else {
-                return done(err, rec, null);
-//            }
+            if (err) {
+                console.log("ERROR: " + err);
+            }
+            rval._id = rec._id;
+            return res.json(rval);
+        });
+    });
+
+
+    app.post("/recipes/:id/edit", function(req, res) {
+        var rval = {
+            success: 1
+        };
+        var data = req.body;
+        if (req.user) {
+            data.user_email = req.user.email;
+        }
+        delete data._csrf;
+        delete data.image;
+        console.log("A2S " + JSON.stringify(req.body));
+        Recipe.findById(req.params.id, function(err, rec) {
+          rec.name = data.name;
+          rec.description = data.description;
+          rec.ingredients = data.ingredients;
+          rec.steps = data.steps;
+          rec.save(function(err,rec) {
+              if (err) {
+                  console.log("ERROR: " + err);
+              }
+              rval._id = rec._id;
+              return res.json(rval);
+          });
         });
     });
 };

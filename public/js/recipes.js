@@ -77,7 +77,7 @@ define("view-model", [ "jquery", "dust-helpers", "upload", "text!/templates/US/e
             var rval = {};
             console.log("GETDATA!");
             rval.name = $('#recipe-form input[name="name"]').val();
-            rval.desc = $('#recipe-form input[name="description"]').val();
+            rval.description = $('#recipe-form input[name="description"]').val();
             rval.ingredients = viewmodel.get_ingredients_data();
             rval.steps = viewmodel.get_steps_data();
             rval.image = $("#recipe-form #recipe-image-upload").val();

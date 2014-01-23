@@ -20,20 +20,31 @@ module.exports = function(app) {
         });
     });
     var prep_form = function(model, errors) {
+       console.log("PRE_PREP " + JSON.stringify(model));
         model = model || {};
         model.recipe = model.recipe || {};
         model.recipe.steps = model.recipe.steps || [];
         model.recipe.steps.push("");
-        var tmpstep = model.recipe.steps;
-        model.recipe.steps = [];
-        var i = 1;
-        tmpstep.forEach(function(x) {
-            model.recipe.steps.push({
-                step: x,
-                offset: i++
-            });
+                
+          var i = 1;
+        model.recipe.steps = model.recipe.steps.map(function(x,y) {
+          var v = {
+               step: x,
+              offset: i++
+          };
+          return v;
         });
-        model.ingredients = [ {
+
+        model.recipe.ingredients = model.recipe.ingredients || [{}];
+
+        model.recipe.ingredients = model.recipe.ingredients.map(function(i) {
+          if(i.custom_ingredient) {
+            i.show_custom = 1;
+          }
+          return i;
+        });
+        /*
+        model.recipe.ingredients = [ {
             amount: "1",
             measure: "tsp",
             ingredient: "fnord"
@@ -41,6 +52,9 @@ module.exports = function(app) {
             custom_ingredient: "magic to taste",
             show_custom: 1
         } ];
+        */
+       console.log("POST_PREP " + JSON.stringify(model));
+       console.log("POST_PREP " + JSON.stringify(model.recipe.steps));
         return model;
     };
     app.get("/recipes/new", function(req, res) {
@@ -65,7 +79,7 @@ module.exports = function(app) {
     });
     app.get("/recipes/:id/edit", function(req, res) {
         Recipe.findById(req.params.id, function(err, recipe) {
-            res.render("recipes/edit",{recipe: recipe});
+            res.render("recipes/edit",prep_form({recipe: recipe.toObject()}) );
         });
     });
     app.get("/recipes/:id/delete", function(req, res) {

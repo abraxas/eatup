@@ -144,26 +144,26 @@ define("view-model", [ "jquery", "dust-helpers", "upload", "text!/templates/US/e
             console.log("AND IMAGE " + imagedata);            
 //            console.log("TO: " + location.pathname + "/" + url);
     
-            if(imagedata) {
-              imagedata.formData =  function(form) {
-                    console.log("REALLY?" + form.serializeArray());
-                    console.log("FORMING + " + $(this).parents('form').serializeArray());
-                    return form.serializeArray();
-                };
-              imagedata.submit().always(function() {
-                console.log("SUCK_WHAT_IMG?");
-              });
+            
 
-            }
-            else {
+            //}
+            //else {
               $.ajax({
                   type: "POST",
                   data: data,
-                  success: function() {
-                      console.log("SUCK_WHAT?");
+                  success: function(data,stat,xhr) {
+                      console.log("SUCK_WHAT? " + data);
+    
+
+                      if(imagedata) {
+                      imagedata.url = ("/recipes/" + data._id + "/save_image");
+                      imagedata.submit().always(function() {
+                        console.log("SUCK_WHAT_IMG?");
+                        });
+                      }
+
                   }
-              });
-            }
+              });            
             return false;
         },
         progress: function(p) {

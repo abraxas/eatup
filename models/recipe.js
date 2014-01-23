@@ -63,7 +63,7 @@ var recipeModel = function() {
         });
     };
     recipeSchema.methods.getImageStream = function(res, fof) {
-        var image_id = this.image_id;
+        var image_id = this.image_id;        
         if (!image_id) {
             if (fof) {
                 res.send(404, fof);

@@ -1,0 +1,13 @@
+<div class="recipe-step">
+   <label for="steps" class="step-label col-sm-1 control-label">{offset}.  </label>
+   <div class="col-sm-10">
+      <textarea name="steps" class="form-control" tabindex="100{offset}">{step}</textarea>
+      <span id="step-error" class="help-inline">{@error id="steps.{index}"}{.}{/error}</span>
+   </div>
+   <div class="col-sm-1 steps-remove">
+      <a href="#" class="remove-step"><span class="glyphicon glyphicon-remove"></span></a>    
+   </div>
+   <br />
+   <br />
+   <br />
+</div>

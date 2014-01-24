@@ -1,0 +1,18 @@
+{
+  "name": "dustjs-linkedin-amd",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/playlyfe/dustjs-linkedin-amd.git"
+  },
+  "homepage": "https://github.com/playlyfe/dustjs-linkedin-amd",
+  "_release": "3b7fa616c6",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3b7fa616c6ad4bbe7124e7b520281ee3551ada61"
+  },
+  "_source": "git://github.com/playlyfe/dustjs-linkedin-amd.git",
+  "_target": "*",
+  "_originalSource": "dustjs-linkedin-amd",
+  "_direct": true
+}

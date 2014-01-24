@@ -34,7 +34,7 @@ module.exports = function(app) {
         var proto = req.body;
         console.log("BOOYA!");
         res.locals.user = new User(proto);
-        console.log("BOOYAZ!" + JSON.stringify( req.body));
+        console.log("BOOYAZ!" + JSON.stringify(req.body));
         res.locals.user.save(function(err, obj) {
             console.log("savd!" + err);
             console.log("savd!" + obj);
@@ -49,13 +49,11 @@ module.exports = function(app) {
             });
         });
     });
-    app.get('/logout', function(req, res) {
-        res.clearCookie('remember_me');
-        req.logout()
-        res.redirect('/login');
+    app.get("/logout", function(req, res) {
+        res.clearCookie("remember_me");
+        req.logout();
+        res.redirect("/login");
     });
-
-
     app.get("/user", function(req, res) {
         res.format({
             json: function() {
@@ -88,7 +86,7 @@ var issueToken = function(user, done) {
         }
         return done(null, token);
     });
-}
+};
 
 var tokens = {};
 
@@ -96,4 +94,4 @@ var saveRememberMeToken = function(token, uid, fn) {
     tokens[token] = uid;
     express.session("remember_me", tokens);
     return fn();
-}
+};

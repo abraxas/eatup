@@ -1,0 +1,8 @@
+<div class="ingredients control-group">  
+<div class="row recipe-ingredient">
+   <div class="ingredient-row col-sm-12 {?custom_ingredient} custom{/custom_ingredient}">
+      {> "recipes/partials/_recipe_form_ingredient_inner" /}
+   </div>
+</div>
+</div>
+

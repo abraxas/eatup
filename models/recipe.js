@@ -18,15 +18,12 @@ var recipeModel = function() {
         raw_amount: String,
         amount: Number,
         measure: String,
-        ingredient: {
-            type: String,
-            required: true
-        }
+        ingredient: String,
+        custom_ingredient: String
     });
     var recipeSchema = new Schema({
         user_email: {
             type: String,
-            required: true,
             ref: "User"
         },
         name: {
@@ -66,7 +63,7 @@ var recipeModel = function() {
         });
     };
     recipeSchema.methods.getImageStream = function(res, fof) {
-        var image_id = this.image_id;
+        var image_id = this.image_id;        
         if (!image_id) {
             if (fof) {
                 res.send(404, fof);

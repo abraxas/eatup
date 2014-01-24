@@ -153,13 +153,22 @@ define("view-model", [ "jquery", "dust-helpers", "upload", "text!/templates/US/e
                   data: data,
                   success: function(data,stat,xhr) {
                       console.log("SUCK_WHAT? " + data);
-    
+
+                      var done = function(data) {
+                        if(data.success) {
+                            window.location = '/recipes';
+                        }
+                      }
 
                       if(imagedata) {
                       imagedata.url = ("/recipes/" + data._id + "/save_image");
                       imagedata.submit().always(function() {
                         console.log("SUCK_WHAT_IMG?");
+                        done(data);
                         });
+                      }
+                      else { 
+                        done(data); 
                       }
 
                   }

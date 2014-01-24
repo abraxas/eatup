@@ -1,0 +1,53 @@
+<input type="hidden" name="_csrf" id="csrf" value="{_csrf}" />
+{#error}
+<div class="alert alert-error">
+   <strong>Error: </strong>{.}
+</div>
+{/error}
+<input name="_user" value="{_user}" type="hidden" />
+<div class="form-group col-md-6">
+   <div id="recipe-pic" class="recipe-preview">
+      {?image_id}
+      <img id="recipe-image-preview"  class="image-responsive" src="image"></img>
+      {:else}
+      <img src="/images/blank-img.jpg" class="image-responsive" id="recipe-image-preview"></img>
+      {/image_id}
+   </div>
+   <div  id="image-cg" class="form-group {@is_err id="image"}error{/is_err}">
+   <label class="control-label" for="image">Image</label>
+   <input type="file" id="recipe-image-upload" name="recipe-image-upload" value="{image}" accept="image/*" />
+   <span id="image-error" class="help-inline">{@error id="image"}{.}{/error}</span>
+</div>
+<div  id="name-cg" class="form-group {@is_err id="name"}error{/is_err}">
+<label class="control-label" for="name">Name</label>
+<input class="form-control" name="name" value="{name}" />
+<span id="name-error" class="help-inline">{@error id="name"}{.}{/error}</span>
+</div>
+<div id="description-cg" class="form-group {@is_err id="description"}error{/is_err}">  
+<label  class="control-label" for="description">Description</label>
+<div class="controls">
+   <input class="form-control" name="description" value="{description}" />
+   <span id="description-error" class="help-inline">{@error id="description"}{.}{/error}</span>
+</div>
+</div>  
+<div id="ingredients-wrapper">
+   <label for="ingredients.amount[1]">Ingredients</label>
+   <div id="recipe-ingredients">
+      {#ingredients}
+            {> "recipes/partials/_recipe_form_ingredient" /}
+   {/ingredients}
+</div>
+<div>
+   <a id="add_ingredient" href="#">Add Ingredient</a>
+</div>
+</div>
+<br />
+<div id="steps-wrapper">
+   <label for="steps">Directions</label>
+   <div id="recipe-steps" class="form-group">    
+      {#steps}
+      {> "recipes/partials/_recipe_form_step" /}
+      {/steps}
+   </div>
+   <a id="add_step" href="#">Add Step</a>
+</div>

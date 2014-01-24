@@ -1,0 +1,28 @@
+{>"layouts/master"/}
+{<main}
+Welcome to {title}
+
+<h2>Recipes</h2>
+<div class="row">
+    {#recipes}
+  <div class="col-xs-3">
+      <div class="thumbnail">
+        <a class="thumb-image-wrapper">
+        {?image_id}
+          <img src="/recipes/{_id}/image" class="thumbnail recipe-image"></img>
+        {:else}
+          <img src="/images/1px_white.png" class="thumbnail recipe-image"></img>
+        {/image_id}
+        </a>
+        <div class="caption">
+        <h3>{name}</h3>
+        <p><!--a href="/recipes/{_id}/view">View</a-->
+        <a class="btn btn-link" href="/recipes/{_id}/edit"><span class="glyphicon glyphicon-edit">Edit</span></a> &nbsp; 
+        <a class="btn btn-link" href="/recipes/{_id}/delete"><span class="glyphicon glyphicon-trash">Delete</span></a></p>
+        </div>
+      </div>
+  </div>
+    {/recipes}
+</div>
+<a href="/recipes/new">Add Recipe</a>
+{/main}

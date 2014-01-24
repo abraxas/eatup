@@ -1,0 +1,17 @@
+{#user}
+<ul class="nav navbar-nav pull-right">
+  <li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+    {email}
+    <b class="caret"></b>
+  </a>
+  <ul class="dropdown-menu">
+    <li><a href="/logout">Log Out</a></li>
+  </ul>
+  </li>
+</ul>
+{:else}
+<ul class="nav navbar-nav pull-right">
+    <li><a href="/login">Login</a></li>
+</ul>
+{/user}

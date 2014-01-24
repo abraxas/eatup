@@ -3,10 +3,11 @@
 //
 // "port": 8000,
 //
-// "i18n": {
-//     "fallback": "en-US",
-//     "contentPath": "path:./locales"
-// },
+ "i18n": {
+     "fallback": "en-US",
+     "contentPath": "path:./locales",
+     "templatePath": "/templates"
+ },
 //
 // "routes": {
 //     "routePath": "path:./controllers"
@@ -41,5 +42,15 @@
 //     "view engine": "js",
 //     "views": "path:./.build/templates"
 // }
+"databaseConfig": {
+  "host": "localhost",
+  "database": "eatup"
+},
+"authConfig": {
+  "owner": {
+    "email": "cjay.martin@gmail.com",
+    "password": "change_me"
+  }
+}
 
 }

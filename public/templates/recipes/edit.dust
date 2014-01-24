@@ -1,0 +1,14 @@
+{>"layouts/master"/}
+{<head}
+<script data-main="/js/recipes" src="/components/requirejs/require.js"></script>
+{/head}
+{<main}
+<h1>Edit Recipe</h1>
+
+{#recipe}
+<form id="recipe-form" method="POST" enctype="multipart/form-data">
+  {>"recipes/partials/_recipe_form" /}
+  <button id="submit" type="submit">Submit</button>
+</form>
+{/recipe}
+{/main}

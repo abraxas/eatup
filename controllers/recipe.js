@@ -5,6 +5,14 @@ var Recipe = require("../models/recipe");
 var os = require("os");
 
 module.exports = function(app) {
+
+    app.get("/recipe*",function(req,res,next) {
+      if(req.user) { 
+        return next();
+      }
+      return res.json({"FAIL":1});
+    });
+
     var model = new Recipe();
     app.get("/recipes", function(req, res) {
         Recipe.find({}, function(e, recipes) {

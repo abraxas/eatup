@@ -14,7 +14,7 @@ module.exports = function(app) {
                     res.json(model);
                 },
                 html: function() {
-                    res.render("recipes", model);
+                    res.render("recipes/index", model);
                 }
             });
         });

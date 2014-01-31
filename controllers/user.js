@@ -12,8 +12,10 @@ module.exports = function(app) {
         res.render("login", {});
     });
     app.get("/new_account", function(req, res) {
-        return res.json({FAIL:1});
-        res.render("new_account", {});
+        return res.json({
+            FAIL: 1
+        });
+        //res.render("new_account", {});
     });
     app.post("/login", passport.authenticate("local", {
         failureRedirect: "/login"
@@ -32,7 +34,10 @@ module.exports = function(app) {
         res.redirect("/");
     });
     app.post("/new_account", function(req, res) {
-        return res.json({FAIL:1});
+        return res.json({
+            FAIL: 1
+        });
+        /*
         var proto = req.body;
         console.log("BOOYA!");
         res.locals.user = new User(proto);
@@ -50,6 +55,7 @@ module.exports = function(app) {
                 }
             });
         });
+        */
     });
     app.get("/logout", function(req, res) {
         res.clearCookie("remember_me");

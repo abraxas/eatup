@@ -46,9 +46,14 @@ img.recipe-image {
 
 a.thumb-image-wrapper {
   display: inline-block;
-  height: 200px;
-  width: 260px;
+  min-height: 220px;
+  min-width: 260px;
   border: 1px solid rgb(221,221,221);
   margin: auto;
   vertical-align: middle;
+}
+
+a.thumb-image-wrapper img {
+  max-height: 200px;
+  max-width: 260px;
 }

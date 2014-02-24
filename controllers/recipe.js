@@ -9,10 +9,10 @@ module.exports = function(app) {
         if (req.user) {
             return next();
         }
-//        return res.json({
-//            FAIL: 1
-//        });
-        return res.redirect('/login');        
+        //        return res.json({
+        //            FAIL: 1
+        //        });
+        return res.redirect("/login");
     });
     var model = new Recipe();
     app.get("/recipes", function(req, res) {

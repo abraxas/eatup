@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+var app = require('../index.js');
+var kraken = require('kraken-js');
+
+kraken.create(app).listen(function (err) {
+    if (err) {
+        console.error(err.stack);
+    }
+});

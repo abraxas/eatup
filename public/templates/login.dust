@@ -12,5 +12,5 @@
    <button class="btn btn-default" type="submit" value="Log In">Log In</button>
 </form>
 <br />
-<div>Or <a href="/new_account">Create a new account</a></div>
+<!-- div>Or <a href="/new_account">Create a new account</a></div -->
 {/main}

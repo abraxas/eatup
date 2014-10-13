@@ -29,9 +29,9 @@ module.exports = function(app) {
                 httpOnly: true,
                 maxAge: 6048e5
             });
+            console.log("LOGZEINZE");
             return next();
         });
-        res.redirect("/");
     });
     app.post("/new_account", function(req, res) {
         return res.json({

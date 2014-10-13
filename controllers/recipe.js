@@ -7,8 +7,10 @@ var os = require("os");
 module.exports = function(app) {
     app.get("/recipe*", function(req, res, next) {
         if (req.user) {
+            console.log("GOT ONE!");
             return next();
         }
+        console.log("NOT ONE!");
         //        return res.json({
         //            FAIL: 1
         //        });
